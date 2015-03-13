@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: [:new, :create]
+  before_action :set_user
 
   # GET /user
   def show
@@ -15,10 +15,9 @@ class UsersController < ApplicationController
   end
 
   # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
-    if @user.save
+    if @user.save_without_session_maintenance
       redirect_to @user, notice: 'User was successfully created.'
     else
       render :new
