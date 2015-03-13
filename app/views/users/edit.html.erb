@@ -1,0 +1,20 @@
+<% content_for :content do %>
+  <div class="container">
+    <h1>Edit User</h1>
+
+    <%= simple_form_for(@user) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :email %>
+        <%= f.input :password_confirmation %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit %>
+      </div>
+    <% end %>
+
+    <%= link_to 'Back', user_path %>
+  </div>
+<% end %>

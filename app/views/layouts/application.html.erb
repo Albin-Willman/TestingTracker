@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= Rails.application.class.parent_name %></title>
+  <%= stylesheet_link_tag    'application' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="page-wrap">
+  <%= render "layouts/navbar" %>
+  <%= yield :content %>
+</div>
+<%= render "layouts/footer" %>
+
+<script>
+  function loadScript() {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
+        'callback=init_map';
+    document.body.appendChild(script);
+  }
+  if(typeof google === 'undefined'){
+    loadScript();
+  } else {
+    init_map();
+  }
+</script>
+
+</body>
+</html>
