@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313221251) do
+ActiveRecord::Schema.define(version: 20150313225546) do
 
   create_table "bug_bashes", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20150313221251) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "testers", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "bug_bash_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "testers", ["bug_bash_id"], name: "index_testers_on_bug_bash_id", using: :btree
+  add_index "testers", ["user_id"], name: "index_testers_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",             limit: 255
@@ -29,4 +39,6 @@ ActiveRecord::Schema.define(version: 20150313221251) do
     t.datetime "updated_at",                    null: false
   end
 
+  add_foreign_key "testers", "bug_bashes"
+  add_foreign_key "testers", "users"
 end
