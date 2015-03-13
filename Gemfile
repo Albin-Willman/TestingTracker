@@ -25,10 +25,11 @@ gem 'paperclip'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
-
 group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console
   gem 'debugger'
+  gem 'guard'
+  gem 'guard-rspec', require: false
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
