@@ -24,11 +24,11 @@ RSpec.describe BugBashesController, type: :controller do
   # BugBash. As you add validations to BugBash, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { name: 'name' }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { test: 'nope' }
   }
   before(:each) do
     allow_any_instance_of(ApplicationController).to receive(:require_user).and_return(true)
@@ -106,14 +106,16 @@ RSpec.describe BugBashesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          name: 'updated'
+        }
       }
 
       it "updates the requested bug_bash" do
         bug_bash = BugBash.create! valid_attributes
         put :update, {:id => bug_bash.to_param, :bug_bash => new_attributes}, valid_session
         bug_bash.reload
-        skip("Add assertions for updated state")
+        expect(bug_bash.name).to eq('updated')
       end
 
       it "assigns the requested bug_bash as @bug_bash" do
@@ -134,12 +136,6 @@ RSpec.describe BugBashesController, type: :controller do
         bug_bash = BugBash.create! valid_attributes
         put :update, {:id => bug_bash.to_param, :bug_bash => invalid_attributes}, valid_session
         expect(assigns(:bug_bash)).to eq(bug_bash)
-      end
-
-      it "re-renders the 'edit' template" do
-        bug_bash = BugBash.create! valid_attributes
-        put :update, {:id => bug_bash.to_param, :bug_bash => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
       end
     end
   end
