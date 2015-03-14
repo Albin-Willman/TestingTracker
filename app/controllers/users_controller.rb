@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
-  before_action :set_user
+  before_action :set_user, except: [:new, :create]
 
   # GET /user
   def show
+  end
+
+  def index
+    @users = User.all
   end
 
   # GET /users/new

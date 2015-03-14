@@ -1,29 +1,31 @@
 <% content_for :content do %>
-  <div class="container">
-    <h1>Listing Test_suites</h1>
-    <p>
-      <%= link_to 'New TestSuite', new_test_suite_path %>
-    </p>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @test_suites.each do |test_suite| %>
+  <section>
+    <div class="container">
+      <h1>Listing Test_suites</h1>
+      <p>
+        <%= link_to 'New TestSuite', new_test_suite_path %>
+      </p>
+      <table class="table table-striped">
+        <thead>
           <tr>
-            <td><%= test_suite.name %></td>
-            <td><%= test_suite.description %></td>
-            <td><%= link_to 'Show', test_suite_path(test_suite) %></td>
-            <td><%= link_to 'Edit', edit_test_suite_path(test_suite) %></td>
-            <td><%= link_to 'Destroy', test_suite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <th>Name</th>
+            <th>Description</th>
+            <th colspan="3"></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+        </thead>
+
+        <tbody>
+          <% @test_suites.each do |test_suite| %>
+            <tr>
+              <td><%= test_suite.name %></td>
+              <td><%= test_suite.description %></td>
+              <td><%= link_to 'Show', test_suite_path(test_suite) %></td>
+              <td><%= link_to 'Edit', edit_test_suite_path(test_suite) %></td>
+              <td><%= link_to 'Destroy', test_suite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
 <% end %>

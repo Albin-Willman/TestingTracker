@@ -1,19 +1,21 @@
 <% content_for :content do %>
-  <div class="container">
-    <p>
-      <strong>Name:</strong>
-      <%= @test_suite.name %>
-    </p>
-    <p>
-      <strong>Description:</strong>
-      <%= @test_suite.description %>
-    </p>
-    <p>
-      <strong>Testers:</strong>
-      <%= @test_suite.users.map(&:email).join(', ') %>
-    </p>
+  <section>
+    <div class="container">
+      <p>
+        <strong>Name:</strong>
+        <%= @test_suite.name %>
+      </p>
+      <p>
+        <strong>Description:</strong>
+        <%= @test_suite.description %>
+      </p>
+      <p>
+        <strong>Testers:</strong>
+        <%= @test_suite.users.map(&:email).join(', ') %>
+      </p>
 
-    <%= link_to 'Back', test_suites_path, class: 'btn btn-primary' %>
-    <%= link_to 'Edit', edit_test_suite_path(@test_suite), class: 'btn btn-primary' %>
-  </div>
+      <%= link_to 'Back', test_suites_path, class: 'btn btn-primary' %>
+      <%= link_to 'Edit', edit_test_suite_path(@test_suite), class: 'btn btn-primary' %>
+    </div>
+  </section>
 <% end %>

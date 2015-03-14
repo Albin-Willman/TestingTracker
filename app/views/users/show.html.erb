@@ -1,9 +1,11 @@
 <% content_for :content do %>
-  <div class="container">
-    <p>
-      <strong>Email:</strong>
-      <%= @user.email %>
-    </p>
-    <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-primary' %>
-  </div>
+  <section>
+    <div class="container">
+      <p>
+        <strong>Email:</strong>
+        <%= @user.email %>
+      </p>
+      <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-primary' %>
+    </div>
+  </section>
 <% end %>
