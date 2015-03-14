@@ -6,7 +6,6 @@ class UserSessionsController < ApplicationController
 
   # Handles log in request
   def create
-    asdads
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       redirect_to user_url

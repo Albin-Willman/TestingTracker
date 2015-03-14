@@ -4,6 +4,7 @@
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :description %>
+    <%= f.association :users, collection: @users.map { |user| [user.email, user.id] }, input_html: { multiple: true, class: 'js-chosen' } %>
   </div>
 
   <div class="form-actions">

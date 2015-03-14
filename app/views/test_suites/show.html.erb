@@ -3,16 +3,16 @@
     <p>
       <strong>Name:</strong>
       <%= @test_suite.name %>
-    </p>      
+    </p>
     <p>
       <strong>Description:</strong>
       <%= @test_suite.description %>
-    </p>      
+    </p>
     <p>
-      <strong>Done:</strong>
-      <%= @test_suite.done %>
-    </p>      
-    
+      <strong>Testers:</strong>
+      <%= @test_suite.users.map(&:email).join(', ') %>
+    </p>
+
     <%= link_to 'Back', test_suites_path, class: 'btn btn-primary' %>
     <%= link_to 'Edit', edit_test_suite_path(@test_suite), class: 'btn btn-primary' %>
   </div>
