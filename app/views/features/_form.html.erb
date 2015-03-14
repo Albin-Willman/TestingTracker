@@ -1,0 +1,14 @@
+<%= simple_form_for(@feature) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description_markdown %>
+    <%= f.input :description_html %>
+    <%= f.association :test_suite %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

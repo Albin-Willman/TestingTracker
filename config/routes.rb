@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :features
+
   resources :test_suites
 
   resources :bug_bashes

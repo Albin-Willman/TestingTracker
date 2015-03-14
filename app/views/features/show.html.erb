@@ -1,0 +1,25 @@
+<% content_for :content do %>
+  <section>
+    <div class="container">
+        <p>
+        <strong>Name:</strong>
+        <%= @feature.name %>
+      </p>      
+        <p>
+        <strong>Description markdown:</strong>
+        <%= @feature.description_markdown %>
+      </p>      
+        <p>
+        <strong>Description html:</strong>
+        <%= @feature.description_html %>
+      </p>      
+        <p>
+        <strong>Test suite:</strong>
+        <%= @feature.test_suite %>
+      </p>      
+        
+      <%= link_to 'Back', features_path, class: 'btn btn-primary' %>
+      <%= link_to 'Edit', edit_feature_path(@feature), class: 'btn btn-primary' %>
+    </div>
+  </section>
+<% end %>

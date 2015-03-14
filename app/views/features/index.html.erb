@@ -1,0 +1,35 @@
+<% content_for :content do %>
+  <section>
+    <div class="container">
+      <h1>Listing Features</h1>
+      <p>
+        <%= link_to 'New Feature', new_feature_path %>
+      </p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Description markdown</th>
+              <th>Description html</th>
+              <th>Test suite</th>
+              <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @features.each do |feature| %>
+            <tr>
+                <td><%= feature.name %></td>
+                <td><%= feature.description_markdown %></td>
+                <td><%= feature.description_html %></td>
+                <td><%= feature.test_suite %></td>
+                <td><%= link_to 'Show', feature_path(feature) %></td>
+              <td><%= link_to 'Edit', edit_feature_path(feature) %></td>
+              <td><%= link_to 'Destroy', feature, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+<% end %>

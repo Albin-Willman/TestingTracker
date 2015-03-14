@@ -10,6 +10,7 @@ class TestSuitesController < ApplicationController
 
   # GET /test_suites/1
   def show
+    @features = @test_suite.features
   end
 
   # GET /test_suites/new
