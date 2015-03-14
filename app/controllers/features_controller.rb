@@ -5,7 +5,7 @@ class FeaturesController < ApplicationController
 
   # GET /features
   def index
-    @features = Features.all
+    @features = Feature.all
   end
 
   # GET /features/1
@@ -24,8 +24,9 @@ class FeaturesController < ApplicationController
   # POST /features
   def create
     @feature = Feature.new(feature_params)
+    @feature.test_suite = @test_suite
     if @feature.save
-      redirect_to @feature, notice: 'Feature was successfully created.'
+      redirect_to test_suite_feature_path(@test_suite, @feature), notice: 'Feature was successfully created.'
     else
       render :new
     end
@@ -34,7 +35,7 @@ class FeaturesController < ApplicationController
   # PATCH/PUT /features/1
   def update
     if @feature.update(feature_params)
-      redirect_to @feature, notice: 'Feature was successfully updated.'
+      redirect_to test_suite_feature_path(@test_suite, @feature), notice: 'Feature was successfully updated.'
     else
       render :edit
     end
@@ -43,7 +44,7 @@ class FeaturesController < ApplicationController
   # DELETE /features/1
   def destroy
     @feature.destroy
-    redirect_to features_url, notice: 'Feature was successfully destroyed.'
+    redirect_to test_suite_url(@feature), notice: 'Feature was successfully destroyed.'
   end
 
   private
@@ -53,7 +54,7 @@ class FeaturesController < ApplicationController
     end
 
     def set_test_suite
-      @test_suite = TestSuite.find(params[:test_suite])
+      @test_suite = TestSuite.find(params[:test_suite_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

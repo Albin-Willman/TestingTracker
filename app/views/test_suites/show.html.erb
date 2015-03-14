@@ -18,4 +18,31 @@
       <%= link_to 'Edit', edit_test_suite_path(@test_suite), class: 'btn btn-primary' %>
     </div>
   </section>
+  <section>
+    <div class="container">
+      <h1>Listing Features</h1>
+      <p>
+        <%= link_to 'New Feature', new_test_suite_feature_path(@test_suite) %>
+      </p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @features.each do |feature| %>
+            <tr>
+              <td><%= feature.name %></td>
+              <td><%= link_to 'Show', test_suite_feature_path(@test_suite, feature) %></td>
+              <td><%= link_to 'Edit', edit_test_suite_feature_path(@test_suite, feature) %></td>
+              <td><%= link_to 'Destroy', test_suite_feature_path(@test_suite, feature), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
 <% end %>

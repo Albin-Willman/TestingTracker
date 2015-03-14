@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  resources :features
-
-  resources :test_suites
-
-  resources :bug_bashes
+  
+  resources :test_suites do
+    resources :features
+  end
 
   resource :user
   get 'users', to: 'users#index'
