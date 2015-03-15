@@ -1,6 +1,6 @@
 == README
 
-This is a small application to organize and document testing.
+This is a small application to organize and document manual testing of software.
 
 The aim is to give a tool to small teams where not everyone has a github account.
 
