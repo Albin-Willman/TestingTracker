@@ -1,21 +1,13 @@
 <% content_for :content do %>
   <section>
     <div class="container">
-      <p>
-        <strong>Name:</strong>
-        <%= @feature.name %>
-      </p>
-      <p>
-        <strong>Description markdown:</strong>
-        <%= @feature.description_markdown %>
-      </p>
-      <p>
-        <strong>Test suite:</strong>
-        <%= @feature.test_suite.name %>
-      </p>
+    <h1><%= @feature.name %></h1>
+    <legend><%= @feature.test_suite.name %></legend>
+    
+    <%= @feature.description_html.try(:html_safe) %>
 
-      <%= link_to 'Back', test_suite_path(@test_suite), class: 'btn btn-primary' %>
-      <%= link_to 'Edit', edit_test_suite_feature_path(@test_suite, @feature), class: 'btn btn-primary' %>
+    <%= link_to 'Back', test_suite_path(@test_suite), class: 'btn btn-primary' %>
+    <%= link_to 'Edit', edit_test_suite_feature_path(@test_suite, @feature), class: 'btn btn-primary' %>
     </div>
   </section>
 <% end %>

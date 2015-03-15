@@ -21,6 +21,7 @@ gem 'kaminari'
 gem 'aws-sdk'
 gem 'paperclip'
 gem "octokit", "~> 3.0"
+gem 'redcarpet'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
