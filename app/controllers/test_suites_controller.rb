@@ -11,6 +11,7 @@ class TestSuitesController < ApplicationController
   # GET /test_suites/1
   def show
     @features = @test_suite.features
+    @testers  = @test_suite.testers.includes(:user)
   end
 
   # GET /test_suites/new

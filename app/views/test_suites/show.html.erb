@@ -1,34 +1,26 @@
 <% content_for :content do %>
   <section>
     <div class="container">
+    <h2><%= @test_suite.name %></h2>
       <p>
-        <strong>Name:</strong>
-        <%= @test_suite.name %>
-      </p>
-      <p>
-        <strong>Description:</strong>
         <%= @test_suite.description %>
       </p>
-      <p>
-        <strong>Testers:</strong>
-        <%= @test_suite.users.map(&:email).join(', ') %>
-      </p>
-
-      <%= link_to 'Back', test_suites_path, class: 'btn btn-primary' %>
-      <%= link_to 'Edit', edit_test_suite_path(@test_suite), class: 'btn btn-primary' %>
     </div>
   </section>
   <section>
     <div class="container">
-      <h1>Listing Features</h1>
+      <h3>Listing Features</h3>
       <p>
         <%= link_to 'New Feature', new_test_suite_feature_path(@test_suite) %>
       </p>
       <table class="table table-striped">
         <thead>
           <tr>
-              <th>Name</th>
-              <th colspan="3"></th>
+            <th>Name</th>
+            <% @testers.each do |tester| %>
+              <th><%= tester.user.email %></th>
+            <% end %>                     
+            <th></th>
           </tr>
         </thead>
 
@@ -36,13 +28,20 @@
           <% @features.each do |feature| %>
             <tr>
               <td><%= feature.name %></td>
+              <% @testers.each do |tester| %>
+                <td><%= tester.user.last_approved(feature) %></td>
+              <% end %>   
               <td><%= link_to 'Show', test_suite_feature_path(@test_suite, feature) %></td>
-              <td><%= link_to 'Edit', edit_test_suite_feature_path(@test_suite, feature) %></td>
-              <td><%= link_to 'Destroy', test_suite_feature_path(@test_suite, feature), method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <%= link_to 'Back', test_suites_path, class: 'btn btn-primary' %>
+      <%= link_to 'Edit', edit_test_suite_path(@test_suite), class: 'btn btn-primary' %>
     </div>
   </section>
 <% end %>

@@ -2,6 +2,10 @@ class Feature < ActiveRecord::Base
   validates_presence_of :name
   belongs_to :test_suite
 
+  has_many :approvals
+  has_many :testers, through: :approvals
+  has_many :users,   through: :testers
+
   before_save :compile_html
 
   MARKDOWN_CONFIG = {

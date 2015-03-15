@@ -6,8 +6,22 @@
     
     <%= @feature.description_html.try(:html_safe) %>
 
+
+    <% if current_user.can_approve?(@feature) %>
+      <% if current_user.last_approved(@feature) %>
+        <p>
+          You approved this feature: <%= current_user.last_approved(@feature).to_date %>
+        </p>
+      <% end %>
+      <p>
+        <%= link_to 'Approve', approve_test_suite_feature_path(@test_suite, @feature), method: 'post', class: 'btn btn-success' %>
+      </p>
+      
+    <% end %>
+
     <%= link_to 'Back', test_suite_path(@test_suite), class: 'btn btn-primary' %>
     <%= link_to 'Edit', edit_test_suite_feature_path(@test_suite, @feature), class: 'btn btn-primary' %>
+    
     </div>
   </section>
 <% end %>

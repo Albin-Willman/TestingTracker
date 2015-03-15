@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   resources :github_tokens
 
   resources :test_suites do
-    resources :features
+    resources :features do
+      member do
+        post 'approve'
+      end
+    end
   end
 
   resource :user

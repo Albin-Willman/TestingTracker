@@ -13,6 +13,16 @@
 
 ActiveRecord::Schema.define(version: 201503141232546) do
 
+  create_table "approvals", force: :cascade do |t|
+    t.integer  "tester_id",  limit: 4
+    t.integer  "feature_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "approvals", ["feature_id"], name: "index_approvals_on_feature_id", using: :btree
+  add_index "approvals", ["tester_id"], name: "index_approvals_on_tester_id", using: :btree
+
   create_table "features", force: :cascade do |t|
     t.string   "name",                 limit: 255
     t.text     "description_markdown", limit: 65535
@@ -62,6 +72,8 @@ ActiveRecord::Schema.define(version: 201503141232546) do
     t.datetime "updated_at",                    null: false
   end
 
+  add_foreign_key "approvals", "features"
+  add_foreign_key "approvals", "testers"
   add_foreign_key "features", "test_suites"
   add_foreign_key "test_suites", "github_tokens"
   add_foreign_key "testers", "test_suites"
