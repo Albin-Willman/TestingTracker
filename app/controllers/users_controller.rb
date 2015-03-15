@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_user
   before_action :set_user, except: [:new, :create]
 
   # GET /user
