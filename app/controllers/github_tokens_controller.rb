@@ -10,8 +10,7 @@ class GithubTokensController < ApplicationController
   # GET /github_tokens/1
   def show
     begin
-      client = Octokit::Client.new(access_token: @github_token.access_token)
-      @repos = client.repos.map { |r| r[:full_name] }
+      @repos = @github_token.github_client.repos.map { |r| r[:full_name] }
     rescue
       @repos = ['None, Bad access token']
     end
