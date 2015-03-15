@@ -13,6 +13,24 @@
 
 ActiveRecord::Schema.define(version: 201503141232546) do
 
+  create_table "features", force: :cascade do |t|
+    t.string   "name",                 limit: 255
+    t.text     "description_markdown", limit: 65535
+    t.text     "description_html",     limit: 65535
+    t.integer  "test_suite_id",        limit: 4
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "features", ["test_suite_id"], name: "index_features_on_test_suite_id", using: :btree
+
+  create_table "github_tokens", force: :cascade do |t|
+    t.string   "access_token", limit: 255
+    t.string   "title",        limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "test_suites", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.text     "description", limit: 65535
@@ -40,6 +58,7 @@ ActiveRecord::Schema.define(version: 201503141232546) do
     t.datetime "updated_at",                    null: false
   end
 
+  add_foreign_key "features", "test_suites"
   add_foreign_key "testers", "test_suites"
   add_foreign_key "testers", "users"
 end

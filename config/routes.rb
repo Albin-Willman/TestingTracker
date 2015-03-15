@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :github_tokens
+
   resources :test_suites do
     resources :features
   end

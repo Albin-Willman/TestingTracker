@@ -1,0 +1,29 @@
+<% content_for :content do %>
+  <section>
+    <div class="container">
+      <h1>Listing Github_tokens</h1>
+      <p>
+        <%= link_to 'New GithubToken', new_github_token_path %>
+      </p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @github_tokens.each do |github_token| %>
+            <tr>
+              <td><%= github_token.title %></td>
+              <td><%= link_to 'Show', github_token_path(github_token) %></td>
+              <td><%= link_to 'Edit', edit_github_token_path(github_token) %></td>
+              <td><%= link_to 'Destroy', github_token, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+<% end %>

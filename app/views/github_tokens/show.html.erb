@@ -1,0 +1,29 @@
+<% content_for :content do %>
+  <section>
+    <div class="container">
+      <p>
+        <strong>Title:</strong>
+        <%= @github_token.title %>
+      </p>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Repositories</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @repos.each do |repo_name| %>
+            <tr>
+              <td><%= repo_name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  
+      <%= link_to 'Back', github_tokens_path, class: 'btn btn-primary' %>
+      <%= link_to 'Edit', edit_github_token_path(@github_token), class: 'btn btn-primary' %>
+    </div>
+  </section>
+<% end %>
