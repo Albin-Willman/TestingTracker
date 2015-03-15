@@ -18,7 +18,7 @@
       </p>
       
     <% end %>
-
+    <%= link_to 'Create issue', new_issue_path(feature_id: @feature.id), class: 'btn btn-danger' %>
     <%= link_to 'Back', test_suite_path(@test_suite), class: 'btn btn-primary' %>
     <%= link_to 'Edit', edit_test_suite_feature_path(@test_suite, @feature), class: 'btn btn-primary' %>
     

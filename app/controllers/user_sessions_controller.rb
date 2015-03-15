@@ -2,7 +2,7 @@ class UserSessionsController < ApplicationController
 
   def new
     @user_session = UserSession.new
-    @no_users = User.any? == false
+    @users_exist = User.any?
   end
 
   # Handles log in request

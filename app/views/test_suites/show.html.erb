@@ -40,6 +40,7 @@
   </section>
   <section>
     <div class="container">
+      <%= link_to 'Create issue', new_issue_path(test_suite_id: @test_suite.id), class: 'btn btn-danger' %>
       <%= link_to 'Back', test_suites_path, class: 'btn btn-primary' %>
       <%= link_to 'Edit', edit_test_suite_path(@test_suite), class: 'btn btn-primary' %>
     </div>

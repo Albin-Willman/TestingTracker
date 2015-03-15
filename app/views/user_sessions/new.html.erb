@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <h2>Login</h2>
-          <% if @no_user %>
+          <% unless @users_exist %>
             <p>
               There are no users in your database. This first time when you log in the user will be automatically created for you.
             </p>

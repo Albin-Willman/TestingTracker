@@ -3,11 +3,6 @@ class FeaturesController < ApplicationController
   before_action :set_test_suite
   before_action :set_feature, only: [:show, :edit, :update, :destroy, :approve]
 
-  # GET /features
-  def index
-    @features = Feature.all
-  end
-
   # GET /features/1
   def show
   end

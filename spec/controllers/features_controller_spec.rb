@@ -51,16 +51,6 @@ RSpec.describe FeaturesController, type: :controller do
   # FeaturesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all features as @features" do
-      feature = Feature.new valid_attributes
-      feature.test_suite = @test_suite
-      feature.save!
-      get :index, test_suite_id: @test_suite.id
-      expect(assigns(:features)).to eq([feature])
-    end
-  end
-
   describe "GET #show" do
     it "assigns the requested feature as @feature" do
       feature = Feature.new valid_attributes
