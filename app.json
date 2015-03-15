@@ -2,5 +2,8 @@
   "name": "Bagbash Tracker",
   "description": "A small service for tracking manual testing in small teams.",
   "repository": "https://github.com/Albin-trialbee/TestingTracker",
-  "keywords": ["rails", "testing"]
+  "keywords": ["rails", "testing"],
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  }
 }
