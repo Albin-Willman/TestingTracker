@@ -23,12 +23,17 @@ RSpec.describe IssuesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Issue. As you add validations to Issue, be sure to
   # adjust the attributes here as well.
+  before(:each) do
+    @user = User.create(email: 'test@example.com', password: '123456')
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+  end
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { title: 'title', description_markdown: 'desc', user_id: @user.id }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { none: 'test' }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -92,11 +97,6 @@ RSpec.describe IssuesController, type: :controller do
         post :create, {:issue => invalid_attributes}, valid_session
         expect(assigns(:issue)).to be_a_new(Issue)
       end
-
-      it "re-renders the 'new' template" do
-        post :create, {:issue => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
     end
   end
 
@@ -131,12 +131,6 @@ RSpec.describe IssuesController, type: :controller do
         issue = Issue.create! valid_attributes
         put :update, {:id => issue.to_param, :issue => invalid_attributes}, valid_session
         expect(assigns(:issue)).to eq(issue)
-      end
-
-      it "re-renders the 'edit' template" do
-        issue = Issue.create! valid_attributes
-        put :update, {:id => issue.to_param, :issue => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
       end
     end
   end

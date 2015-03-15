@@ -3,6 +3,8 @@ class Issue < ActiveRecord::Base
   belongs_to :test_suite
   belongs_to :user
 
+  validates_presence_of :title, :user
+
   before_save :compile_html
 
   MARKDOWN_CONFIG = {
