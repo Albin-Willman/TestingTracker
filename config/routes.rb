@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :issues
+
   resources :github_tokens
 
   resources :test_suites do

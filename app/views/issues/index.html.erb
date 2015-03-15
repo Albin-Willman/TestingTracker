@@ -1,0 +1,39 @@
+<% content_for :content do %>
+  <section>
+    <div class="container">
+      <h1>Listing Issues</h1>
+      <p>
+        <%= link_to 'New Issue', new_issue_path %>
+      </p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Title</th>
+            <th>Feature</th>
+            <th>Test suite</th>
+            <th>Closed</th>
+            <th>User</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @issues.each do |issue| %>
+            <tr>
+              <td><%= issue.number %></td>
+              <td><%= issue.title %></td>
+              <td><%= issue.feature.try(:name) %></td>
+              <td><%= issue.test_suite.try(:name) %></td>
+              <td><%= issue.closed %></td>
+              <td><%= issue.user.email %></td>
+              <td><%= link_to 'Show', issue_path(issue) %></td>
+              <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
+              <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+<% end %>

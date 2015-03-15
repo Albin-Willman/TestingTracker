@@ -41,6 +41,23 @@ ActiveRecord::Schema.define(version: 201503141232546) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "issues", force: :cascade do |t|
+    t.integer  "feature_id",           limit: 4
+    t.integer  "test_suite_id",        limit: 4
+    t.string   "title",                limit: 255
+    t.boolean  "closed",               limit: 1
+    t.integer  "number",               limit: 4
+    t.text     "description_markdown", limit: 65535
+    t.text     "description_html",     limit: 65535
+    t.integer  "user_id",              limit: 4
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "issues", ["feature_id"], name: "index_issues_on_feature_id", using: :btree
+  add_index "issues", ["test_suite_id"], name: "index_issues_on_test_suite_id", using: :btree
+  add_index "issues", ["user_id"], name: "index_issues_on_user_id", using: :btree
+
   create_table "test_suites", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.text     "description",     limit: 65535
@@ -75,6 +92,9 @@ ActiveRecord::Schema.define(version: 201503141232546) do
   add_foreign_key "approvals", "features"
   add_foreign_key "approvals", "testers"
   add_foreign_key "features", "test_suites"
+  add_foreign_key "issues", "features"
+  add_foreign_key "issues", "test_suites"
+  add_foreign_key "issues", "users"
   add_foreign_key "test_suites", "github_tokens"
   add_foreign_key "testers", "test_suites"
   add_foreign_key "testers", "users"
