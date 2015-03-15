@@ -32,12 +32,16 @@ ActiveRecord::Schema.define(version: 201503141232546) do
   end
 
   create_table "test_suites", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.text     "description", limit: 65535
-    t.boolean  "done",        limit: 1
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "name",            limit: 255
+    t.text     "description",     limit: 65535
+    t.boolean  "done",            limit: 1
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "repo",            limit: 255
+    t.integer  "github_token_id", limit: 4
   end
+
+  add_index "test_suites", ["github_token_id"], name: "index_test_suites_on_github_token_id", using: :btree
 
   create_table "testers", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
@@ -59,6 +63,7 @@ ActiveRecord::Schema.define(version: 201503141232546) do
   end
 
   add_foreign_key "features", "test_suites"
+  add_foreign_key "test_suites", "github_tokens"
   add_foreign_key "testers", "test_suites"
   add_foreign_key "testers", "users"
 end

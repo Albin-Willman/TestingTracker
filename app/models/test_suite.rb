@@ -3,4 +3,5 @@ class TestSuite < ActiveRecord::Base
   has_many :testers
   has_many :users, through: :testers
   has_many :features
+  belongs_to :github_token
 end

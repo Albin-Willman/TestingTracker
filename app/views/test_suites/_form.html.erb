@@ -5,6 +5,8 @@
     <%= f.input :name %>
     <%= f.input :description %>
     <%= f.association :users, collection: @users.map { |user| [user.email, user.id] }, input_html: { multiple: true, class: 'js-chosen' } %>
+    <%= f.association :github_token, collection: @github_tokens.map { |token| [token.title, token.id] } %>
+    <%= f.input :repo %>
   </div>
 
   <div class="form-actions">
