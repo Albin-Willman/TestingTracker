@@ -29,7 +29,7 @@
             <tr>
               <td><%= feature.name %></td>
               <% @testers.each do |tester| %>
-                <td><%= tester.user.last_approved(feature) %></td>
+                <td><%= tester.user.last_approved(feature) || '-' %></td>
               <% end %>   
               <td><%= link_to 'Show', test_suite_feature_path(@test_suite, feature) %></td>
             </tr>

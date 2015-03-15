@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   # GET /user
   def show
+    @test_suite = TestSuite.all.last
   end
 
   def index

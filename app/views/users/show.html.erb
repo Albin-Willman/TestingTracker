@@ -5,7 +5,12 @@
         <strong>Email:</strong>
         <%= @user.email %>
       </p>
-      <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-primary' %>
+      <ul>
+        <li><%= link_to "Latest test suite", test_suite_path(@test_suite), class: 'btn btn-default' %></li>
+        <li><%= link_to "Github Tokens", github_tokens_path, class: 'btn btn-default' %></li>
+        <li><%= link_to "Test suites", test_suites_path, class: 'btn btn-default' %></li>
+      </ul>
+      <%= link_to 'Edit', edit_user_path, class: 'btn btn-primary' %>
     </div>
   </section>
 <% end %>
