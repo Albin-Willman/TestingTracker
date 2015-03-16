@@ -45,4 +45,9 @@
       <%= link_to 'Edit', edit_test_suite_path(@test_suite), class: 'btn btn-primary' %>
     </div>
   </section>
+  <section>
+    <div class="container">
+      <%= render 'issues/issue_list', issues: @issues %>
+    </div>
+  </section>
 <% end %>

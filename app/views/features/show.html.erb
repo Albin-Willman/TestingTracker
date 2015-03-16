@@ -1,27 +1,37 @@
 <% content_for :content do %>
   <section>
     <div class="container">
-    <h1><%= @feature.name %></h1>
-    <legend><%= @feature.test_suite.name %></legend>
-    
-    <%= @feature.description_html.try(:html_safe) %>
+      <h1><%= @feature.name %></h1>
+      <legend><%= @feature.test_suite.name %></legend>
 
+      <%= @feature.description_html.try(:html_safe) %>
 
-    <% if current_user.can_approve?(@feature) %>
-      <% if current_user.last_approved(@feature) %>
-        <p>
-          You approved this feature: <%= current_user.last_approved(@feature).to_date %>
-        </p>
-      <% end %>
-      <p>
-        <%= link_to 'Approve', approve_test_suite_feature_path(@test_suite, @feature), method: 'post', class: 'btn btn-success' %>
-      </p>
-      
-    <% end %>
-    <%= link_to 'Create issue', new_issue_path(feature_id: @feature.id), class: 'btn btn-danger' %>
-    <%= link_to 'Back', test_suite_path(@test_suite), class: 'btn btn-primary' %>
-    <%= link_to 'Edit', edit_test_suite_feature_path(@test_suite, @feature), class: 'btn btn-primary' %>
-    
+      <hr>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <% if current_user.can_approve?(@feature) %>
+            <% if current_user.last_approved(@feature) %>
+              <p>
+                You approved this feature: <%= current_user.last_approved(@feature).to_date %>
+              </p>
+            <% end %>
+            <p>
+              <%= link_to 'Approve', approve_test_suite_feature_path(@test_suite, @feature), method: 'post', class: 'btn btn-success' %>
+            </p>
+
+          <% end %>
+
+          <%= link_to 'New issue', new_issue_path(feature_id: @feature.id), class: 'btn btn-danger' %>
+        </div>
+        <div class="col-sm-6">
+          <h3>Reported Issues</h3>
+          <%= render 'issues/issue_list', issues: @issues %>
+        </div>
+      </div>
+
+      <%= link_to 'Back', test_suite_path(@test_suite), class: 'btn btn-primary' %>
+      <%= link_to 'Edit', edit_test_suite_feature_path(@test_suite, @feature), class: 'btn btn-primary' %>
     </div>
   </section>
 <% end %>

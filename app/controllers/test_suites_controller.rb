@@ -12,6 +12,7 @@ class TestSuitesController < ApplicationController
   def show
     @features = @test_suite.features
     @testers  = @test_suite.testers.includes(:user)
+    @issues   = @test_suite.issues
   end
 
   # GET /test_suites/new

@@ -5,6 +5,7 @@ class Feature < ActiveRecord::Base
   has_many :approvals
   has_many :testers, through: :approvals
   has_many :users,   through: :testers
+  has_many :issues
 
   before_save :compile_html
 

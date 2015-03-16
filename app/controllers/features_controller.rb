@@ -5,6 +5,7 @@ class FeaturesController < ApplicationController
 
   # GET /features/1
   def show
+    @issues = @feature.issues
   end
 
   # GET /features/new

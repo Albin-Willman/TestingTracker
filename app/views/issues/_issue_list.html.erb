@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Title</th>
+      <th>Closed</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% issues.each do |issue| %>
+      <tr>
+        <td><%= issue.number %></td>
+        <td><%= issue.title %></td>
+        <td><%= issue.closed %></td>
+        <td><%= issue.user.email %></td>
+        <td><%= link_to 'Show', issue_path(issue) %></td>
+        <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
