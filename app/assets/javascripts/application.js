@@ -5,6 +5,7 @@
 
 $(document).ready(function(){
   $.each($('.js-chosen'), function(){ initChosen($(this)); });
+  $('.js-datatable').DataTable();
 });
 
 function initChosen($select) {
