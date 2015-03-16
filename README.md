@@ -1,8 +1,10 @@
-# README
+# Test tracker
 
 This is a small application to organize and document manual testing of software.
 
 The aim is to give a tool to small teams where not everyone has a github account.
+
+[![Build Status](https://travis-ci.org/trialbee/meta-secretary.png?branch=master)](https://travis-ci.org/trialbee/meta-secretary)
 
 ## Usage
 
@@ -17,4 +19,20 @@ If you setup github access tokens issues reported in this tool will be created a
 No configuration deployment on heroku using this button:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/Albin-trialbee/TestingTracker)
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
+### Tests
+
+```bash
+$ rspec # Will run all tests with coverage (output saved to coverage/)
+# Or if you'd like to run relevant tests automatically on any file change
+$ guard
+```
 

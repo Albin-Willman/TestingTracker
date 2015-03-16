@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 2.1.2
+  - 2.0.0
+  - 1.9.3
+before_script:
+  - mysql -e 'create database `test-tracker_test`;'
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+  - bundle exec rake db:test:prepare
+script: bundle exec rspec --tag ~no_travis spec
+bundler_args: --without production
+cache: bundler
