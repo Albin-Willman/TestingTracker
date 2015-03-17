@@ -10,3 +10,4 @@ before_script:
   - bundle exec rake db:test:prepare
 script: bundle exec rspec --tag ~no_travis spec
 bundler_args: --without production
+cache: bundler
