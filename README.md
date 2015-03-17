@@ -4,7 +4,7 @@ This is a small application to organize and document manual testing of software.
 
 The aim is to give a tool to small teams where not everyone has a github account.
 
-[![Build Status](https://travis-ci.org/trialbee/meta-secretary.png?branch=master)](https://travis-ci.org/trialbee/meta-secretary)
+[![Build Status](https://travis-ci.org/Albin-trialbee/TestingTracker.png?branch=master)](https://travis-ci.org/Albin-trialbee/TestingTracker)
 
 ## Usage
 
