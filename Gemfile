@@ -28,8 +28,6 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
 group :development, :test do
-  # Call 'debugger' anywhere in the code to stop execution and get a debugger console
-  gem 'debugger'
   gem 'guard'
   gem 'guard-rspec', require: false
 
