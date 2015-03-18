@@ -11,3 +11,6 @@ before_script:
 script: bundle exec rspec --tag ~no_travis spec
 bundler_args: --without production
 cache: bundler
+addons:
+  code_climate:
+    repo_token: 794dc02f8b73798fec0fb6559cb3f81d799a6539b59c69dc95db74e3d8218546

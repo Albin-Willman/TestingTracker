@@ -27,6 +27,8 @@ gem 'redcarpet'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
+gem "codeclimate-test-reporter", group: :test, require: nil
+
 group :development, :test do
   gem 'guard'
   gem 'guard-rspec', require: false
