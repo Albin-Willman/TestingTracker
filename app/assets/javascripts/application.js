@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 function initChosen($select) {
   var noResultText = $select.attr('data-no-result');
-  if (noResultText == undefined) {
+  if (noResultText === undefined) {
     noResultText = "No such records";
   }
   $select.chosen({
