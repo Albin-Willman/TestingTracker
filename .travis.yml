@@ -8,6 +8,9 @@ before_script:
   - bundle exec rake db:create
   - bundle exec rake db:migrate
   - bundle exec rake db:test:prepare
-script: CODECLIMATE_REPO_TOKEN=794dc02f8b73798fec0fb6559cb3f81d799a6539b59c69dc95db74e3d8218546 bundle exec rspec --tag ~no_travis spec
+script: bundle exec rspec --tag ~no_travis spec
 bundler_args: --without production
 cache: bundler
+addons:
+  code_climate:
+    repo_token: 794dc02f8b73798fec0fb6559cb3f81d799a6539b59c69dc95db74e3d8218546
