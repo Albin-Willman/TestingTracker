@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_user
-  before_action :set_user, except: [:new, :create]
+  before_action :set_user, except: [:new, :create, :destroy]
 
   # GET /user
   def show
@@ -42,6 +42,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
     @user.destroy
     redirect_to root_path
   end

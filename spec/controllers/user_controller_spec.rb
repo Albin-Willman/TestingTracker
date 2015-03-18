@@ -47,6 +47,15 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe "GET #index" do
+    it "assigns a all users as @users" do
+      user = User.new valid_attributes
+      user.save!
+      get :index
+      expect(assigns(:users)).to eq(User.all)
+    end
+  end
+
   describe "GET #edit" do
     it "assigns the requested feature as @feature" do
       user = User.new valid_attributes
@@ -54,6 +63,39 @@ RSpec.describe UsersController, type: :controller do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
       get :edit
       expect(assigns(:user)).to eq(user)
+    end
+  end
+
+  describe "POST #create" do
+    context "with valid params" do
+      it "creates a new user" do
+        expect {
+          post :create, {:user => valid_attributes}
+        }.to change(User, :count).by(1)
+      end
+
+      it "assigns a newly created user as @user" do
+        post :create, {:user => valid_attributes}
+        expect(assigns(:new_user)).to be_a(User)
+        expect(assigns(:new_user)).to be_persisted
+      end
+
+      it "redirects to the created github_token" do
+        post :create, {:user => valid_attributes}
+        expect(response).to redirect_to(user_path)
+      end
+    end
+
+    context "with invalid params" do
+      it "assigns a newly created but unsaved github_token as @github_token" do
+        post :create, {:user => invalid_attributes}
+        expect(assigns(:new_user)).to be_a_new(User)
+      end
+
+      it "re-renders the 'new' template" do
+        post :create, {:user => invalid_attributes}
+        expect(response).to render_template("new")
+      end
     end
   end
 

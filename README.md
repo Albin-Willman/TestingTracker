@@ -8,6 +8,8 @@ The aim is to give a tool to small teams where not everyone has a github account
 
 [![Code Climate](https://codeclimate.com/github/Albin-trialbee/TestingTracker/badges/gpa.svg)](https://codeclimate.com/github/Albin-trialbee/TestingTracker)
 
+[![Test Coverage](https://codeclimate.com/github/Albin-trialbee/TestingTracker/badges/coverage.svg)](https://codeclimate.com/github/Albin-trialbee/TestingTracker)
+
 ## Usage
 
 If there is no users in the database any attempt to login will create a user and log you in.
