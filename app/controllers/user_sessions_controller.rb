@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+  before_action :require_no_user, except: [:destroy]
 
   def new
     @user_session = UserSession.new
@@ -20,6 +21,12 @@ class UserSessionsController < ApplicationController
   def destroy
     current_user_session.try(:destroy)
     redirect_to root_url
+  end
+
+  private
+
+  def require_no_user
+    redirect_to user_path if current_user
   end
 
 end
