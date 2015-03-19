@@ -107,6 +107,62 @@ RSpec.describe UsersController, type: :controller do
       end
     end
 
+    describe "PUT #update" do
+      before(:each) do
+        @user = User.create! valid_attributes
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+      end
+
+      context "with valid params" do
+
+        let(:new_valid_attributes) {
+          {
+            email: 'new_email@example.com',
+            password: '123456',
+            password_validation: '123456'
+          }
+        }
+
+        it "updates the requested user" do
+          
+          put :update, {:user => new_valid_attributes}
+          @user.reload
+          expect(@user.email).to eq('new_email@example.com')
+        end
+
+        it "assigns the requested user as @user" do
+          put :update, {:user => new_valid_attributes}
+          expect(assigns(:user)).to eq(@user)
+        end
+
+        it "redirects to the user" do
+          put :update, {:user => new_valid_attributes}
+          expect(response).to redirect_to(user_path)
+        end
+      end
+
+      context "with invalid params" do
+        let(:new_invalid_attributes) {
+          {
+            email: 'new_email@example.com',
+            password: '123456',
+            password_validation: 'bad password'
+          }
+        }
+        it "assigns the user as @user" do
+          put :update, {:user => invalid_attributes}
+          expect(assigns(:user)).to eq(@user)
+        end
+
+        it "assigns the user as @user unless correct password" do
+          put :update, {:user => new_invalid_attributes}
+          @user.reload
+          expect(assigns(:user)).to eq(@user)
+          expect(@user.email).to eq('email@example.com')
+        end
+      end
+    end
+
   end
 
   describe "Authentification fails" do

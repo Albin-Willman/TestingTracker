@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
   def update
     password_validation = params[:user][:password_validation]
-    valid_password = @user.valid_password?(password_validation)
+    valid_password      = @user.valid_password?(password_validation)
     if valid_password && @user.update(user_params)
       redirect_to user_path, notice: 'User was successfully updated.'
     else
