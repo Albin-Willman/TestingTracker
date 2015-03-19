@@ -33,7 +33,7 @@ RSpec.describe IssuesController, type: :controller do
   }
 
   let(:invalid_attributes) {
-    { none: 'test' }
+    { title: "", description_markdown: 'desc' }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -132,6 +132,12 @@ RSpec.describe IssuesController, type: :controller do
         issue = Issue.create! valid_attributes
         put :update, {:id => issue.to_param, :issue => invalid_attributes}, valid_session
         expect(assigns(:issue)).to eq(issue)
+      end
+
+      it "re-renders the 'new' template" do
+        issue = Issue.create! valid_attributes
+        put :update, {:id => issue.to_param, :issue => invalid_attributes}, valid_session
+        expect(response).to render_template("edit")
       end
     end
   end
