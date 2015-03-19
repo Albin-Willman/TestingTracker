@@ -103,14 +103,15 @@ RSpec.describe IssuesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { title: 'title', description_markdown: '## new desc', user_id: @user.id }
       }
 
       it "updates the requested issue" do
         issue = Issue.create! valid_attributes
         put :update, {:id => issue.to_param, :issue => new_attributes}, valid_session
         issue.reload
-        skip("Add assertions for updated state")
+        expect(issue.description_markdown).to eq('## new desc')
+        expect(issue.description_html).to eq("<h2>new desc</h2>\n")
       end
 
       it "assigns the requested issue as @issue" do
