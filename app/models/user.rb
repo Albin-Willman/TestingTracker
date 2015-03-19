@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   end
 
   def last_approved(feature)
-    return unless features.find_by(id: feature.id)
-    approvals.where(feature_id: feature.id).last.created_at
+    feature_approvals = approvals.where(feature_id: feature.id)
+    feature_approvals.any? && feature_approvals.last.created_at
   end
 
 end
