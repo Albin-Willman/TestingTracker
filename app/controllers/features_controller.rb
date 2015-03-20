@@ -50,7 +50,7 @@ class FeaturesController < ApplicationController
   # DELETE /features/1
   def destroy
     @feature.destroy
-    redirect_to test_suite_url(@feature), notice: 'Feature was successfully destroyed.'
+    redirect_to test_suite_url(@test_suite), notice: 'Feature was successfully destroyed.'
   end
 
   private

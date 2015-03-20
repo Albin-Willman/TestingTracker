@@ -111,5 +111,23 @@ RSpec.describe FeaturesController, type: :controller do
       end
     end
   end
+  describe "DELETE #destroy" do
+    it "destroys the requested feature" do
+      feature = Feature.new valid_attributes
+      feature.test_suite = @test_suite
+      feature.save!
+      expect {
+        delete :destroy, { test_suite_id: @test_suite.id, id: feature.to_param }
+      }.to change(Feature, :count).by(-1)
+    end
+
+    it "redirects to the users list" do
+      feature = Feature.new valid_attributes
+      feature.test_suite = @test_suite
+      feature.save!
+      delete :destroy, { test_suite_id: @test_suite.id, id: feature.to_param }
+      expect(response).to redirect_to(test_suite_url(@test_suite))
+    end
+  end
 
 end
