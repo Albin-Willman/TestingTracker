@@ -78,6 +78,46 @@ RSpec.describe FeaturesController, type: :controller do
     end
   end
 
+  describe "PUT #update" do
+    before(:each) do
+      @feature = Feature.new valid_attributes
+      @feature.test_suite = @test_suite
+      @feature.save!
+    end
+    context "with valid params" do
+      let(:new_valid_attributes) {
+        {
+          name: 'name',
+          description_markdown: '## Markdown'
+        }
+      }
+
+      it "updates a feature as @feature" do
+        put :update, { test_suite_id: @test_suite.id, id: @feature, :feature => new_valid_attributes}
+        @feature.reload
+        expect(@feature.description_markdown).to eq('## Markdown')
+        expect(@feature.description_html).to eq("<h2>Markdown</h2>\n")
+      end
+
+      it "redirects to the feature" do
+        put :update, { test_suite_id: @test_suite.id, id: @feature, :feature => new_valid_attributes}
+        expect(response).to redirect_to(test_suite_feature_path(@test_suite, assigns(:feature)))
+      end
+    end
+
+    context "with invalid params" do
+      it "assigns the correct feature as @feature" do
+        put :update, { test_suite_id: @test_suite.id, id: @feature, :feature => invalid_attributes}
+        expect(assigns(:feature)).to eq(@feature)
+      end
+
+      it "re-renders the 'new' template" do
+        put :update, { test_suite_id: @test_suite.id, id: @feature, :feature => invalid_attributes}
+        expect(response).to render_template("edit")
+      end
+    end
+  end
+
   describe "POST #create" do
     context "with valid params" do
       it "creates a new feature" do
@@ -93,14 +133,14 @@ RSpec.describe FeaturesController, type: :controller do
         expect(assigns(:feature).test_suite).to eq(@test_suite)
       end
 
-      it "redirects to the created github_token" do
+      it "redirects to the feature" do
         post :create, { test_suite_id: @test_suite.id, :feature => valid_attributes }
         expect(response).to redirect_to(test_suite_feature_path(@test_suite, assigns(:feature)))
       end
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved github_token as @github_token" do
+      it "assigns the correct feature as @feature" do
         post :create, { test_suite_id: @test_suite.id, :feature => invalid_attributes }
         expect(assigns(:feature)).to be_a_new(Feature)
       end
@@ -111,6 +151,8 @@ RSpec.describe FeaturesController, type: :controller do
       end
     end
   end
+
+
   describe "DELETE #destroy" do
     it "destroys the requested feature" do
       feature = Feature.new valid_attributes

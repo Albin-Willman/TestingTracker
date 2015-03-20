@@ -2,7 +2,7 @@ class Feature < ActiveRecord::Base
   validates_presence_of :name
   belongs_to :test_suite
 
-  has_many :approvals
+  has_many :approvals, dependent: :destroy
   has_many :testers, through: :approvals
   has_many :users,   through: :testers
   has_many :issues
