@@ -31,7 +31,7 @@ RSpec.describe FeaturesController, type: :controller do
   }
 
   let(:invalid_attributes) {
-    { invalid: 'markdown' }
+    { name: '' }
   }
   before(:all) do
     @test_suite = TestSuite.create(name: 'test')
@@ -75,6 +75,40 @@ RSpec.describe FeaturesController, type: :controller do
       feature.save!
       get :edit, test_suite_id: @test_suite.id, :id => feature.to_param
       expect(assigns(:feature)).to eq(feature)
+    end
+  end
+
+  describe "POST #create" do
+    context "with valid params" do
+      it "creates a new feature" do
+        expect {
+          post :create, {test_suite_id: @test_suite.id, :feature => valid_attributes}
+        }.to change(Feature, :count).by(1)
+      end
+
+      it "assigns a newly created feature as @feature" do
+        post :create, {test_suite_id: @test_suite.id, :feature => valid_attributes}
+        expect(assigns(:feature)).to be_a(Feature)
+        expect(assigns(:feature)).to be_persisted
+        expect(assigns(:feature).test_suite).to eq(@test_suite)
+      end
+
+      it "redirects to the created github_token" do
+        post :create, { test_suite_id: @test_suite.id, :feature => valid_attributes }
+        expect(response).to redirect_to(test_suite_feature_path(@test_suite, assigns(:feature)))
+      end
+    end
+
+    context "with invalid params" do
+      it "assigns a newly created but unsaved github_token as @github_token" do
+        post :create, { test_suite_id: @test_suite.id, :feature => invalid_attributes }
+        expect(assigns(:feature)).to be_a_new(Feature)
+      end
+
+      it "re-renders the 'new' template" do
+        post :create, { test_suite_id: @test_suite.id, :feature => invalid_attributes }
+        expect(response).to render_template("new")
+      end
     end
   end
 
