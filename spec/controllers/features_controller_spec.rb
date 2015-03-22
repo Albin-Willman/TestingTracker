@@ -152,6 +152,50 @@ RSpec.describe FeaturesController, type: :controller do
     end
   end
 
+  describe "APPROVE #post" do
+    before(:each) do
+      @feature = Feature.new valid_attributes
+      @feature.test_suite = @test_suite
+      @feature.save!
+      @user = User.create(email: 'email@example.com', password: '123456')
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+    end
+    context "with valid params" do
+      before(:each) do
+        @test_suite.users << @user
+      end
+
+      it "creates an approval of a feature" do
+        expect {
+          post :approve, { test_suite_id: @test_suite.id, id: @feature.id }
+        }.to change(Approval, :count).by(1)
+      end
+
+      it "assigns a newly created approval as @approval" do
+        post :approve, { test_suite_id: @test_suite.id, id: @feature.id }
+        expect(assigns(:approval)).to be_a(Approval)
+        expect(assigns(:approval)).to be_persisted
+        expect(assigns(:approval).tester.user).to eq(@user)
+        expect(assigns(:approval).feature).to eq(@feature)
+      end
+
+      it "redirects to the feature" do
+        post :approve, { test_suite_id: @test_suite.id, id: @feature.id }
+        expect(response).to redirect_to(test_suite_feature_path(@test_suite, @feature))
+      end
+    end
+    context "With invalid params" do
+      it "assigns a new unpersisted approval as @approval" do
+        post :approve, { test_suite_id: @test_suite.id, id: @feature.id }
+        expect(assigns(:approval)).to be_a_new(Approval)
+      end
+
+      it "redirects to the feature" do
+        post :approve, { test_suite_id: @test_suite.id, id: @feature.id }
+        expect(response).to redirect_to(test_suite_feature_path(@test_suite, @feature))
+      end
+    end
+  end
 
   describe "DELETE #destroy" do
     it "destroys the requested feature" do

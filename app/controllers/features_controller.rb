@@ -39,8 +39,8 @@ class FeaturesController < ApplicationController
 
   def approve
     tester = Tester.find_by(user_id: current_user.id, test_suite_id: @test_suite.id)
-    @approve = Approval.new(tester: tester, feature: @feature)
-    if @approve.save
+    @approval = Approval.new(tester: tester, feature: @feature)
+    if @approval.save
       redirect_to test_suite_feature_path(@test_suite, @feature), notice: 'Feature approved.'
     else
       redirect_to test_suite_feature_path(@test_suite, @feature), danger: 'Failed to save approval'
