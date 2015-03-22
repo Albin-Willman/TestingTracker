@@ -11,5 +11,21 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe TableHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  let (:header_opts) { { header: ['test1', 'test2', 'test3'] } }
+  let (:header_html) { "<thead><tr><th>test1</th><th>test2</th><th>test3</th></tr></thead>" }
+
+  it 'creates and calls a table generator' do
+    opts = {
+      header: ['test1', 'test2', 'test3'],
+      content: [[1,2,3],[2,3,5],[3,5,8]]
+    }
+    expect(generate_table(opts)).to eq(TableHelper::TableBuilder.new(opts).generate)
+  end
+
+  it 'generates headers for tables' do
+    opts = header_opts
+    expect(generate_table(opts)).to eq("<table class=\"table\">#{header_html}</table>")
+  end
+
 end
