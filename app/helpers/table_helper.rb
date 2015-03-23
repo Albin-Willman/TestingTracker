@@ -13,7 +13,8 @@ module TableHelper
     def generate
       content_tag :table, class: table_class do
         safe_join([
-          table_header
+          table_header,
+          table_body
         ])
       end
     end
@@ -27,6 +28,13 @@ module TableHelper
       end
     end
 
+    def table_body
+      return unless rows = @opts[:content]
+      content_tag :tbody do
+        safe_join(rows.map { |row| table_row(false, row) })
+      end
+    end
+
     def table_row(header, elements)
       return unless elements
       content_tag :tr do
@@ -35,9 +43,9 @@ module TableHelper
     end
 
     def table_cell(header, element)
-      tag_type = header ? :th : :tr
+      tag_type = header ? :th : :td
       content_tag tag_type do
-        element
+        element.to_s
       end
     end
 

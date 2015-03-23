@@ -14,6 +14,8 @@
             <%= f.input :password %>
             <%= f.submit 'Login', class: 'btn btn-primary' %>
           <% end %>
+
+          <%= generate_table({ content: [[1,2,3],[2,3,5],[3,5,8]] }) %>
         </div>
       </div>
     </div>
