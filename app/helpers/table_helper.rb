@@ -50,7 +50,10 @@ module TableHelper
     end
 
     def table_class
-      'table'
+      classes = ['table']
+      classes << 'table-striped' if @opts[:striped]
+      classes << 'js-datatable'  if @opts[:data_table]
+      classes.join(' ')
     end
   end
 

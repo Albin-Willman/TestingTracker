@@ -13,29 +13,14 @@
       <p>
         <%= link_to 'New Feature', new_test_suite_feature_path(@test_suite) %>
       </p>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <% @testers.each do |tester| %>
-              <th><%= tester.user.email %></th>
-            <% end %>                     
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @features.each do |feature| %>
-            <tr>
-              <td><%= feature.name %></td>
-              <% @testers.each do |tester| %>
-                <td><%= tester.user.last_approved(feature) || '-' %></td>
-              <% end %>   
-              <td><%= link_to 'View', test_suite_feature_path(@test_suite, feature) %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= generate_table(
+        striped: true,
+        header: ['Name'] + @testers.map { |tester| tester.user.email },
+        content: @features.map do |feature|
+          [feature.name] +
+          @testers.map { |tester| tester.user.last_approved(feature) || '-' } +
+          [link_to('View', test_suite_feature_path(@test_suite, feature))]
+        end) %>
     </div>
   </section>
   <section>
