@@ -5,25 +5,19 @@
       <p>
         <%= link_to 'New GithubToken', new_github_token_path %>
       </p>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
 
-        <tbody>
-          <% @github_tokens.each do |github_token| %>
-            <tr>
-              <td><%= github_token.title %></td>
-              <td><%= link_to 'Show', github_token_path(github_token) %></td>
-              <td><%= link_to 'Edit', edit_github_token_path(github_token) %></td>
-              <td><%= link_to 'Destroy', github_token, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= generate_table(
+        striped: true,
+        data_table: true,
+        header: ['Title', '', '', ''],
+        content: @github_tokens.map do |github_token|
+          [
+            github_token.title,
+            link_to('Show', github_token_path(github_token)),
+            link_to('Edit', edit_github_token_path(github_token)),
+            link_to('Destroy', github_token, method: :delete, data: { confirm: 'Are you sure?' })
+          ]
+        end) %>
     </div>
   </section>
 <% end %>

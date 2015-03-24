@@ -8,6 +8,7 @@
 
       <%= generate_table(
         striped: true,
+        data_table: true,
         header: ['Name', 'Description', '', '', ''],
         content: @test_suites.map do |test_suite|
           [

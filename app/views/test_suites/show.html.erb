@@ -15,6 +15,7 @@
       </p>
       <%= generate_table(
         striped: true,
+        data_table: true,
         header: ['Name'] + @testers.map { |tester| tester.user.email },
         content: @features.map do |feature|
           [feature.name] +
