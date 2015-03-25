@@ -1,7 +1,4 @@
-//= require jquery
-//= require jquery_ujs
-//= require twitter/bootstrap
-//= require_tree .
+//= require imports
 
 $(document).ready(function(){
   $.each($('.js-chosen'), function(){ initChosen($(this)); });
