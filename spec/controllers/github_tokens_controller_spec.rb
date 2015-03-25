@@ -32,7 +32,9 @@ RSpec.describe GithubTokensController, type: :controller do
   }
 
   before(:each) do
-    allow_any_instance_of(ApplicationController).to receive(:require_user).and_return(true)
+    @user = User.new email: 'admin@example.com', password: '123456', admin: true
+    @user.save!
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
   end
 
   # This should return the minimal set of values that should be in the session

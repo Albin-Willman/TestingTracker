@@ -1,5 +1,6 @@
 class GithubTokensController < ApplicationController
   before_action :require_user
+  before_action :require_admin
   before_action :set_github_token, only: [:show, :edit, :update, :destroy]
 
   # GET /github_tokens

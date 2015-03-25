@@ -8,7 +8,7 @@ class UserSessionsController < ApplicationController
 
   # Handles log in request
   def create
-    User.create(email: params[:user_session][:email], password: params[:user_session][:password]) unless User.any?
+    User.create(email: params[:user_session][:email], password: params[:user_session][:password], admin: true) unless User.any?
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       redirect_to user_url

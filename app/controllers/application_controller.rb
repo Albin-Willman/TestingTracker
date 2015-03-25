@@ -20,4 +20,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
     false
   end
+
+  def require_admin
+    return true if current_user.admin
+    redirect_to root_url
+    false
+  end
 end

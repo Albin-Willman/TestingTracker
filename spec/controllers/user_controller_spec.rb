@@ -29,20 +29,15 @@ RSpec.describe UsersController, type: :controller do
   describe "authed actions" do
 
     before(:each) do
-      allow_any_instance_of(ApplicationController).to receive(:require_user).and_return(true)
+      @user = User.new email: 'admin@example.com', password: '123456', admin: true
+      @user.save!
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
 
     describe "GET #show" do
       it "assigns the requested user as @user" do
-        user = User.new valid_attributes
-        user.save!
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
         get :show
-        expect(assigns(:user)).to eq(user)
-      end
-
-      it "redirects to root if not logged in" do
-
+        expect(assigns(:user)).to eq(@user)
       end
     end
 
@@ -64,11 +59,8 @@ RSpec.describe UsersController, type: :controller do
 
     describe "GET #edit" do
       it "assigns the requested feature as @feature" do
-        user = User.new valid_attributes
-        user.save!
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
         get :edit
-        expect(assigns(:user)).to eq(user)
+        expect(assigns(:user)).to eq(@user)
       end
     end
 
@@ -106,11 +98,6 @@ RSpec.describe UsersController, type: :controller do
     end
 
     describe "PUT #update" do
-      before(:each) do
-        @user = User.create! valid_attributes
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
-      end
-
       context "with valid params" do
 
         let(:new_valid_attributes) {
@@ -156,7 +143,7 @@ RSpec.describe UsersController, type: :controller do
           put :update, {:user => new_invalid_attributes}
           @user.reload
           expect(assigns(:user)).to eq(@user)
-          expect(@user.email).to eq('email@example.com')
+          expect(@user.email).to eq('admin@example.com')
         end
       end
     end
