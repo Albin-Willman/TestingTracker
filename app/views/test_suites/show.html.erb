@@ -5,14 +5,16 @@
       <p>
         <%= @test_suite.description %>
       </p>
+      <% if @test_suite.repo %>
+        <p>
+          <%= "Connected to: #{@test_suite.repo}" %>
+        </p>
+      <% end %>
     </div>
   </section>
   <section>
     <div class="container">
       <h3>Listing Features - <%= link_to 'New Feature', new_test_suite_feature_path(@test_suite), class: 'btn btn-primary btn-xs' %></h3>
-      <p>
-
-      </p>
       <%= generate_table(
         striped: true,
         data_table: true,
