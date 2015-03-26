@@ -16,11 +16,13 @@
       <%= generate_table(
         striped: true,
         data_table: true,
-        header: ['Name'] + @testers.map { |tester| tester.user.email },
+        header: ['Name', ''] + @testers.map { |tester| tester.user.email },
         content: @features.map do |feature|
-          [feature.name] +
-          @testers.map { |tester| tester.user.last_approved(feature) || '-' } +
-          [link_to('View', test_suite_feature_path(@test_suite, feature))]
+          [
+            feature.name,
+            link_to('View', test_suite_feature_path(@test_suite, feature))
+          ] +
+          @testers.map { |tester| tester.user.last_approved(feature) || '-' }
         end) %>
     </div>
   </section>
