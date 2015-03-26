@@ -18,7 +18,7 @@
             <div class="well">
               <h3>Issue related to</h3>
               <p>Test suite: <%= @issue.test_suite.try(:name) %></p>
-              <p>Feature: <%= @issue.feature.try(:name) %></p>
+              <p>Feature: <%= link_to_feature(@issue.feature) %></p>
             </div>
           <% end %>
         </div>
