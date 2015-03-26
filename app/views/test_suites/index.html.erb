@@ -1,9 +1,9 @@
 <% content_for :content do %>
   <section>
     <div class="container">
-      <h1>Listing Test_suites</h1>
+      <h1>Listing TestSuites - <%= link_to 'New TestSuite', new_test_suite_path, class: 'btn btn-primary btn-xs' %></h1>
       <p>
-        <%= link_to 'New TestSuite', new_test_suite_path %>
+
       </p>
 
       <%= generate_table(

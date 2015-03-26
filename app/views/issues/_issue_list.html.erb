@@ -1,7 +1,7 @@
 <%= generate_table(
   striped: true,
   data_table: true,
-  header: ['Number', 'Title', 'Closed', 'User', '', ''],
+  header: ['#', 'Title', 'Closed', 'User', '', ''],
   content: issues.map do |issue|
     [
       issue.number,
