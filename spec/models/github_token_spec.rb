@@ -15,19 +15,37 @@ RSpec.describe GithubToken, type: :model do
     let (:org_repos) {
       "repos for org"
     }
-    before(:each) do
-      allow_any_instance_of(Octokit::Client).to receive(:repos).and_return(personal_repos)
-      allow_any_instance_of(Octokit::Client).to receive(:org_repos).and_return(org_repos)
-    end
+    context 'valid tokens' do
+      before(:each) do
+        allow_any_instance_of(Octokit::Client).to receive(:repos).and_return(personal_repos)
+        allow_any_instance_of(Octokit::Client).to receive(:org_repos).and_return(org_repos)
+      end
 
-    it 'return repos for github user if no organization is set' do
-      token = GithubToken.new(title: 'Test', access_token: 'aasdasd')
-      expect(token.repos).to eq(personal_repos)
-    end
+      it 'return repos for github user if no organization is set' do
+        token = GithubToken.new(title: 'Test', access_token: 'aasdasd')
+        expect(token.repos).to eq(personal_repos)
+      end
 
-    it 'return org repos if org is set' do
-      token = GithubToken.new(title: 'Test', access_token: 'aasdasd', organization: 'org')
-      expect(token.repos).to eq(org_repos)
+      it 'return org repos if org is set' do
+        token = GithubToken.new(title: 'Test', access_token: 'aasdasd', organization: 'org')
+        expect(token.repos).to eq(org_repos)
+      end
+    end
+    context 'invalid tokens' do
+      before(:each) do
+        allow_any_instance_of(Octokit::Client).to receive(:repos).and_raise("this error")
+        allow_any_instance_of(Octokit::Client).to receive(:org_repos).and_raise("this error")
+      end
+
+      it 'returns empty array if token is not valid' do
+        token = GithubToken.new(title: 'Test', access_token: 'aasdasd')
+        expect(token.repos).to eq([])
+      end
+
+      it 'returns empty array if token is not valid' do
+        token = GithubToken.new(title: 'Test', access_token: 'aasdasd', organization: 'org')
+        expect(token.repos).to eq([])
+      end
     end
   end
 
