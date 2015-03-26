@@ -12,7 +12,7 @@ require 'rails_helper'
 # end
 RSpec.describe IssuesHelper, type: :helper do
 
-  context 'method issues_back_path(issue)' do 
+  context 'method issues_back_path(issue)' do
     it 'returns path to index for issue with no assossiations' do
       issue = Issue.new
       expect(issues_back_path(issue)).to eq(issues_path)
@@ -32,6 +32,18 @@ RSpec.describe IssuesHelper, type: :helper do
       feature = Feature.create!(name: 'name', description_markdown: 'markdown', test_suite: test_suite)
       issue.feature = feature
       expect(issues_back_path(issue)).to eq(test_suite_feature_path(test_suite, feature))
+    end
+  end
+
+  context 'method link_to_feature(feature)' do
+    it 'returns nil if given nil' do
+      expect(link_to_feature(nil)).to be_nil
+    end
+
+    it 'returns a link to a feature if a feature is given' do
+      test_suite = TestSuite.create!(name: 'test', description: 'desc')
+      feature = Feature.create!(name: 'name', description_markdown: 'markdown', test_suite: test_suite)
+      expect(link_to_feature(feature)).to eq(link_to(feature.name, test_suite_feature_path(feature.test_suite, feature)))
     end
   end
 end
