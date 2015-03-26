@@ -35,10 +35,13 @@ ActiveRecord::Schema.define(version: 201503141232546) do
   add_index "features", ["test_suite_id"], name: "index_features_on_test_suite_id", using: :btree
 
   create_table "github_tokens", force: :cascade do |t|
-    t.string   "access_token", limit: 255
-    t.string   "title",        limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "access_token",  limit: 255
+    t.string   "title",         limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "client_secret", limit: 255
+    t.string   "client_id",     limit: 255
+    t.string   "organization",  limit: 255
   end
 
   create_table "issues", force: :cascade do |t|

@@ -16,13 +16,24 @@ class Issue < ActiveRecord::Base
 
   def register_on_github
     return unless github_token
-    client = github_token.github_client
+    client = github_token.client
     begin
-      issue = client.create_issue(test_suite.repo, title, description_markdown)
+      issue = client.create_issue(test_suite.repo, title, build_github_markdown)
       self.closed = false
       self.number = issue[:number]
     rescue
     end
+  end
+
+  def build_github_markdown
+    components = [
+      'Issue created in test tracker:',
+      description_markdown,
+      "By user: #{user.email}"
+    ]
+    components << "Test suite: #{test_suite.name}" if test_suite
+    components << "feature: #{feature.name}" if feature
+    components.join('<br/><br/>')
   end
 
 end

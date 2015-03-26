@@ -10,11 +10,7 @@ class GithubTokensController < ApplicationController
 
   # GET /github_tokens/1
   def show
-    begin
-      @repos = @github_token.github_client.repos.map { |r| r[:full_name] }
-    rescue
-      @repos = ['None, Bad access token']
-    end
+    @repos = @github_token.repos.map { |r| r[:full_name] }
   end
 
   # GET /github_tokens/new
@@ -59,6 +55,6 @@ class GithubTokensController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def github_token_params
-      params.require(:github_token).permit(:access_token, :title)
+      params.require(:github_token).permit(:access_token, :title, :organization)
     end
 end
