@@ -109,7 +109,6 @@ RSpec.describe UsersController, type: :controller do
         }
 
         it "updates the requested user" do
-          
           put :update, {:user => new_valid_attributes}
           @user.reload
           expect(@user.email).to eq('new_email@example.com')
@@ -162,7 +161,41 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to redirect_to(root_url)
       end
     end
+  end
 
+  describe "Admin auth fails" do
+    before(:each) do
+      user = User.create! email: 'admin@example.com', password: '123456'
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    end
+
+    describe "GET #index" do
+      it "redirects to root if not logged in" do
+        get :index
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    describe "GET #new" do
+      it "redirects to root if not logged in" do
+        get :new
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    describe "POST #create" do
+      it "redirects to root if not logged in" do
+        post :create, {:user => valid_attributes}
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    describe "DESTROY #create" do
+      it "redirects to root if not logged in" do
+        delete :destroy, { id: 2 }
+        expect(response).to redirect_to(root_path)
+      end
+    end
   end
 
   describe "Authentification fails" do
