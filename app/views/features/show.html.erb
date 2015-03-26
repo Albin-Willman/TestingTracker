@@ -9,7 +9,7 @@
       <hr>
 
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-2">
           <% if current_user.can_approve?(@feature) %>
             <% if current_user.last_approved(@feature) %>
               <p>
@@ -24,7 +24,7 @@
 
           <%= link_to 'New issue', new_issue_path(feature_id: @feature.id), class: 'btn btn-danger' %>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-10">
           <h3>Reported Issues</h3>
           <%= render 'issues/issue_list', issues: @issues %>
         </div>
