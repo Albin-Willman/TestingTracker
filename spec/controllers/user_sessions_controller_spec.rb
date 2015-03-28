@@ -71,6 +71,8 @@ RSpec.describe UserSessionsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "redirects to the root path" do
+      user = User.create! valid_attributes
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
       delete :destroy
       expect(response).to redirect_to(root_path)
     end
