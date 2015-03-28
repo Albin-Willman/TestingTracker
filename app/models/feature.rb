@@ -9,6 +9,8 @@ class Feature < ActiveRecord::Base
 
   before_save :compile_html
 
+  private
+
   def compile_html
     return unless description_markdown
     self.description_html = Markdowner.markdown_to_html(description_markdown)

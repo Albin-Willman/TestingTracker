@@ -11,6 +11,7 @@ class Issue < ActiveRecord::Base
   before_create :register_on_github
 
   def compile_html
+    return unless description_markdown
     self.description_html = Markdowner.markdown_to_html(description_markdown)
   end
 
