@@ -190,7 +190,7 @@ RSpec.describe UsersController, type: :controller do
       end
     end
 
-    describe "DESTROY #create" do
+    describe "DESTROY #destroy" do
       it "redirects to root if not logged in" do
         delete :destroy, { id: 2 }
         expect(response).to redirect_to(root_path)
