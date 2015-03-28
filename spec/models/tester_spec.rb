@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Tester, type: :model do
   context "Validations" do
-    PRESENCE_ERROR = "can't be blank"
     it 'validates the presence of a user' do
       tester = Tester.create
       expect(tester.errors.any?).to be_truthy
