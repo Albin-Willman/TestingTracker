@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 201503141232546) do
     t.datetime "updated_at",                    null: false
     t.string   "repo",            limit: 255
     t.integer  "github_token_id", limit: 4
+    t.integer  "status",          limit: 4
   end
 
   add_index "test_suites", ["github_token_id"], name: "index_test_suites_on_github_token_id", using: :btree

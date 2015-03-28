@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
 
     before(:each) do
       @user = User.create(email: 'email@example.com', password: '123456')
-      @test_suite = TestSuite.create(name: 'test')
+      @test_suite = TestSuite.create(name: 'test', status: 'active')
       @feature = Feature.new(name: 'name', description_markdown: 'markdown')
       @feature.test_suite = @test_suite
       @feature.save!

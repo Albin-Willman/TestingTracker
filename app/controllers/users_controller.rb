@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # GET /user
   def show
-    @test_suite = TestSuite.all.last
+    @test_suite = TestSuite.active.last
   end
 
   def index

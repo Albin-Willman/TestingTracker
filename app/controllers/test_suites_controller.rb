@@ -6,6 +6,7 @@ class TestSuitesController < ApplicationController
   # GET /test_suites
   def index
     @test_suites = TestSuite.all
+    @test_suites = @test_suites.active unless current_user.admin
   end
 
   # GET /test_suites/1
@@ -65,6 +66,6 @@ class TestSuitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def test_suite_params
-      params.require(:test_suite).permit(:name, :description, :repo, :github_token_id, user_ids: [])
+      params.require(:test_suite).permit(:name, :description, :repo, :github_token_id, :status, user_ids: [])
     end
 end

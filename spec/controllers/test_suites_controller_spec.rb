@@ -24,7 +24,7 @@ RSpec.describe TestSuitesController, type: :controller do
   # TestSuite. As you add validations to TestSuite, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    { name: 'test', description: 'desc' }
+    { name: 'test', description: 'desc', status: 'active' }
   }
 
   let(:invalid_attributes) {
@@ -32,7 +32,8 @@ RSpec.describe TestSuitesController, type: :controller do
   }
 
   before(:each) do
-    allow_any_instance_of(ApplicationController).to receive(:require_user).and_return(true)
+    @user = User.create! email: 'admin@example.com', password: '123456', admin: true
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
   end
 
   # This should return the minimal set of values that should be in the session

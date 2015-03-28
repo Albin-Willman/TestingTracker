@@ -20,14 +20,14 @@ RSpec.describe IssuesHelper, type: :helper do
 
     it 'returns path to test suite for issue with assossiated with test suite but no feature' do
       issue = Issue.new
-      test_suite = TestSuite.create!(name: 'test', description: 'desc')
+      test_suite = TestSuite.create!(name: 'test', description: 'desc', status: 'active')
       issue.test_suite = test_suite
       expect(issues_back_path(issue)).to eq(test_suite_path(test_suite))
     end
 
     it 'returns path to feature for issue with assossiated with test suite and feature' do
       issue = Issue.new
-      test_suite = TestSuite.create!(name: 'test', description: 'desc')
+      test_suite = TestSuite.create!(name: 'test', description: 'desc', status: 'active')
       issue.test_suite = test_suite
       feature = Feature.create!(name: 'name', description_markdown: 'markdown', test_suite: test_suite)
       issue.feature = feature
@@ -41,7 +41,7 @@ RSpec.describe IssuesHelper, type: :helper do
     end
 
     it 'returns a link to a feature if a feature is given' do
-      test_suite = TestSuite.create!(name: 'test', description: 'desc')
+      test_suite = TestSuite.create!(name: 'test', description: 'desc', status: 'active')
       feature = Feature.create!(name: 'name', description_markdown: 'markdown', test_suite: test_suite)
       expect(link_to_feature(feature)).to eq(link_to(feature.name, test_suite_feature_path(feature.test_suite, feature)))
     end

@@ -34,7 +34,7 @@ RSpec.describe FeaturesController, type: :controller do
     { name: '' }
   }
   before(:all) do
-    @test_suite = TestSuite.create(name: 'test')
+    @test_suite = TestSuite.create(name: 'test', status: 'active')
   end
 
   before(:each) do
