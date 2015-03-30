@@ -60,6 +60,7 @@ RSpec.describe Issue, type: :model do
     end
   end
   context 'check_github_status' do
+
     before(:each) do
       allow_any_instance_of(GithubToken).to receive(:client).and_return(GithubClientMock.new(false))
       @issue = Issue.new(title: 'title', description_markdown: 'desc', user_id: @user.id)
@@ -72,6 +73,14 @@ RSpec.describe Issue, type: :model do
       @issue.title = 'new'
       @issue.save!
       expect(@issue.closed).to be_truthy
+    end
+
+    it 'can not update status with bad token' do
+      allow_any_instance_of(GithubToken).to receive(:client).and_return(GithubClientMock.new(true))
+      expect(@issue.closed).to be_falsey
+      @issue.title = 'new'
+      @issue.save!
+      expect(@issue.closed).to be_falsey
     end
   end
 end
