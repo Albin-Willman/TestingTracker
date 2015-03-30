@@ -7,7 +7,7 @@ class Issue < ActiveRecord::Base
 
   validates_presence_of :title, :user
 
-  before_save :compile_html
+  before_save :compile_html, :check_github_status
   before_create :register_on_github
 
   def compile_html
@@ -21,6 +21,17 @@ class Issue < ActiveRecord::Base
     begin
       issue = client.create_issue(test_suite.repo, title, build_github_markdown)
       self.closed = false
+      self.number = issue[:number]
+    rescue
+    end
+  end
+
+  def check_github_status
+    return unless github_token && number
+    client = github_token.client
+    begin
+      issue = client.issue(test_suite.repo, number)
+      self.closed = issue[:state] == 'closed'
       self.number = issue[:number]
     rescue
     end

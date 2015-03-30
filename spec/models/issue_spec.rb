@@ -13,6 +13,10 @@ RSpec.describe Issue, type: :model do
       raise "Mock error" if @error
       { number: 1 }
     end
+    def issue(repo, number)
+      raise "Mock error" if @error
+      { state: 'closed' }
+    end
   end
   
   it "returns nil when trying to set issue on github without token" do
@@ -53,6 +57,21 @@ RSpec.describe Issue, type: :model do
       @issue = Issue.new(title: 'title', description_markdown: 'desc', user_id: @user.id)
       @issue.test_suite = TestSuite.new(name: 'test_suite_name')
       expect(@issue.build_github_markdown).to include("test_suite_name")
+    end
+  end
+  context 'check_github_status' do
+    before(:each) do
+      allow_any_instance_of(GithubToken).to receive(:client).and_return(GithubClientMock.new(false))
+      @issue = Issue.new(title: 'title', description_markdown: 'desc', user_id: @user.id)
+      @issue.github_token = GithubToken.create!(access_token: 'tokentokentokentokentokentokentokentoken', title: 'test')
+      @issue.save!
+    end
+
+    it 'checks status in github on save' do
+      expect(@issue.closed).to be_falsey
+      @issue.title = 'new'
+      @issue.save!
+      expect(@issue.closed).to be_truthy
     end
   end
 end
